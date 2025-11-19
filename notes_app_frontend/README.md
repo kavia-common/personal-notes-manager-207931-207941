@@ -1,82 +1,62 @@
-# Lightweight React Template for KAVIA
+# Ocean Notes – React Frontend
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A simple, responsive Notes app that lets you create, view, edit, and delete notes. Notes are persisted to localStorage and optionally synchronized with a backend if `REACT_APP_API_BASE` is defined.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Ocean Professional theme with subtle gradients and shadows
+- Responsive two-pane layout (stacks on small screens)
+- Notes list with search (title/content)
+- Editor with title and markdown-like text area
+- Autosave and Cmd/Ctrl+S to save
+- Delete with confirmation
+- Persistence via localStorage using key: `notes_app.v1.notes`
+- Optional REST API integration via `REACT_APP_API_BASE` (graceful fallback to local storage)
 
 ## Getting Started
 
-In the project directory, you can run:
+In the project directory:
 
 ### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
+Runs the app in development mode.  
+Open http://localhost:3000 to view it in your browser (port 3000 as required).
 
 ### `npm run build`
+Builds the app for production into the `build` folder.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Environment Variables
 
-## Customization
+This frontend uses standard CRA-style environment variables. Relevant ones for this app:
+- `REACT_APP_API_BASE` – Optional. If set, the app will attempt CRUD against this base URL (e.g., `https://api.example.com`). If omitted or unreachable, the app will continue working with localStorage without crashing.
 
-### Colors
+Other variables may exist in your environment; they are not required for this app to function.
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+## Data Model
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+```
+{id: string, title: string, content: string, updatedAt: number}
 ```
 
-### Components
+## Storage
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+Notes are persisted under the key: `notes_app.v1.notes` in `window.localStorage`.
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+## Keyboard Shortcuts
 
-## Learn More
+- Cmd/Ctrl+S: Save current note (in addition to autosave)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## No Backend Required
 
-### Code Splitting
+This app works entirely offline using localStorage. If a backend is later provided, set `REACT_APP_API_BASE` to enable syncing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Theming
 
-### Analyzing the Bundle Size
+Colors:
+- Primary: `#2563EB`
+- Secondary/Accent: `#F59E0B`
+- Error: `#EF4444`
+- Background: `#f9fafb`
+- Surface: `#ffffff`
+- Text: `#111827`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Found in `src/styles/theme.css`.
